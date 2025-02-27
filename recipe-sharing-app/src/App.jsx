@@ -7,7 +7,8 @@ import DeleteRecipeButton from './components/DeleteRecipeButton';
 import FavoritesList from './components/FavoritesList';
 import RecommendationsList from './components/RecommendationsList';
 import { useRecipeStore } from './recipeStore';
-import FavoriteButton from './components/FavoriteButton'; // Import FavoriteButton
+import FavoriteButton from './components/FavoriteButton';
+import SearchBar from './components/SearchBar'; // Import SearchBar
 
 function App() {
   const recipes = useRecipeStore(state => state.recipes);
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <div className="App">
         <h1>Recipe Sharing App</h1>
+        <SearchBar /> {/* Add SearchBar */}
         <AddRecipeForm />
         <RecipeList />
         <FavoritesList />
@@ -26,7 +28,7 @@ function App() {
               <RecipeDetails />
               <EditRecipeForm />
               <DeleteRecipeButton />
-              <FavoriteButton recipeId={parseInt(useParams().recipeId)} /> {/* Add FavoriteButton */}
+              <FavoriteButton recipeId={parseInt(useParams().recipeId)} />
               <Link to="/">Back to List</Link>
             </div>
           } />

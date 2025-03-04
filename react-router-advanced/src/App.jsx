@@ -1,11 +1,12 @@
 // App.jsx
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Profile from './components/Profile';
 import BlogPost from './components/BlogPost';
 import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,10 +17,6 @@ function App() {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-  };
-
-  const ProtectedRoute = ({ element, ...rest }) => {
-    return isAuthenticated ? element : <Navigate to="/login" />;
   };
 
   return (
@@ -55,7 +52,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile/*" element={<ProtectedRoute element={<Profile />} />} />
+        <Route
+          path="/profile/*"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} element={<Profile />} />
+          }
+        />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
       </Routes>

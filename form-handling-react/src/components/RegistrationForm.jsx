@@ -4,27 +4,30 @@ function RegistrationForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({}); // Use an object for errors
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    let newErrors = {}; // Create a new error object
 
     if (!username) {
-      setError('Username is required.');
-      return;
+      newErrors.username = 'Username is required.';
     }
     if (!email) {
-      setError('Email is required.');
-      return;
+      newErrors.email = 'Email is required.';
     }
     if (!password) {
-      setError('Password is required.');
+      newErrors.password = 'Password is required.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors); // Set errors if any exist
       return;
     }
 
     // Simulate form submission
     console.log('Form submitted:', { username, email, password });
-    setError(''); // Clear error on successful submission
+    setErrors({}); // Clear errors on successful submission
     setUsername('');
     setEmail('');
     setPassword('');
@@ -32,7 +35,13 @@ function RegistrationForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {Object.keys(errors).length > 0 && (
+        <div style={{ color: 'red' }}>
+          {errors.username && <p>{errors.username}</p>}
+          {errors.email && <p>{errors.email}</p>}
+          {errors.password && <p>{errors.password}</p>}
+        </div>
+      )}
       <div>
         <label htmlFor="username">Username:</label>
         <input

@@ -8,10 +8,10 @@ function UserProfile() {
           alt="User"
           className="rounded-full w-24 h-24 sm:w-36 sm:h-36 mx-auto transition-transform duration-300 ease-in-out hover:scale-110"
         />
-        <h1 className="text-lg sm:text-xl text-blue-800 my-4 text-center transition-colors duration-300 ease-in-out hover:text-blue-500">
+        <h1 className="text-lg sm:text-lg md:text-xl text-blue-800 my-4 text-center transition-colors duration-300 ease-in-out hover:text-blue-500">
           John Doe
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 text-center">
+        <p className="text-sm sm:text-sm md:text-base text-gray-600 text-center">
           Developer at Example Co. Loves to write code and explore new technologies.
         </p>
       </div>

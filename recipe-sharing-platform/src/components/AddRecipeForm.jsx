@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState(''); // Changed from instructions to steps
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -22,8 +22,8 @@ const AddRecipeForm = () => {
         formErrors.ingredients = 'At least two ingredients are required';
       }
     }
-    if (!instructions) {
-      formErrors.instructions = 'Instructions are required';
+    if (!steps) { // Changed from instructions to steps
+      formErrors.steps = 'Steps are required';
     }
 
     if (Object.keys(formErrors).length > 0) {
@@ -32,12 +32,12 @@ const AddRecipeForm = () => {
     }
 
     // Process form submission (e.g., send data to an API)
-    console.log({ title, ingredients, instructions });
+    console.log({ title, ingredients, steps }); // Changed from instructions to steps
 
     // Reset form fields
     setTitle('');
     setIngredients('');
-    setInstructions('');
+    setSteps(''); // Changed from instructions to steps
     setErrors({});
   };
 
@@ -72,17 +72,17 @@ const AddRecipeForm = () => {
           {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </div>
         <div>
-          <label htmlFor="instructions" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="steps" className="block text-sm font-medium text-gray-700">
             Preparation Steps
           </label>
           <textarea
-            id="instructions"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            id="steps"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)} // Changed from instructions to steps
             rows="4"
-            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ${errors.instructions ? 'border-red-500' : ''}`}
+            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ${errors.steps ? 'border-red-500' : ''}`} // Changed from instructions to steps
           ></textarea>
-          {errors.instructions && <p className="text-red-500 text-sm">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>} // Changed from instructions to steps
         </div>
         <div>
           <button

@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState(''); // Changed from instructions to steps
+  const [steps, setSteps] = useState('');
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const validate = () => {
     let formErrors = {};
 
     if (!title) {
@@ -22,22 +21,29 @@ const AddRecipeForm = () => {
         formErrors.ingredients = 'At least two ingredients are required';
       }
     }
-    if (!steps) { // Changed from instructions to steps
+    if (!steps) {
       formErrors.steps = 'Steps are required';
     }
 
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
+    return formErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
     // Process form submission (e.g., send data to an API)
-    console.log({ title, ingredients, steps }); // Changed from instructions to steps
+    console.log({ title, ingredients, steps });
 
     // Reset form fields
     setTitle('');
     setIngredients('');
-    setSteps(''); // Changed from instructions to steps
+    setSteps('');
     setErrors({});
   };
 
@@ -45,6 +51,7 @@ const AddRecipeForm = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Add New Recipe</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* ... (rest of the form input fields and error messages) */}
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">
             Title
@@ -78,11 +85,11 @@ const AddRecipeForm = () => {
           <textarea
             id="steps"
             value={steps}
-            onChange={(e) => setSteps(e.target.value)} // Changed from instructions to steps
+            onChange={(e) => setSteps(e.target.value)}
             rows="4"
-            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ${errors.steps ? 'border-red-500' : ''}`} // Changed from instructions to steps
+            className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ${errors.steps ? 'border-red-500' : ''}`}
           ></textarea>
-          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>} // Changed from instructions to steps
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
         <div>
           <button

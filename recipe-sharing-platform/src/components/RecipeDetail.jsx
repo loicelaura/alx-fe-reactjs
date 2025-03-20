@@ -25,22 +25,21 @@ const RecipeDetail = () => {
       />
       <p className="text-gray-600 mb-4">{recipe.summary}</p>
 
-      {/* Add more detailed recipe information here */}
       <div className="bg-white rounded-lg shadow-md p-4 mb-4">
         <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
         <ul className="list-disc list-inside">
-            <li>Ingredient 1</li>
-            <li>Ingredient 2</li>
-            <li>Ingredient 3</li>
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient}</li>
+          ))}
         </ul>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-4">
         <h2 className="text-xl font-semibold mb-2">Instructions</h2>
         <ol className="list-decimal list-inside">
-            <li>Step 1</li>
-            <li>Step 2</li>
-            <li>Step 3</li>
+          {recipe.instructions.map((instruction, index) => (
+            <li key={index}>{instruction}</li>
+          ))}
         </ol>
       </div>
     </div>
